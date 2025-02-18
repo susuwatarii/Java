@@ -1,3 +1,12 @@
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.*;
 import java.util.Scanner;
 
@@ -7,6 +16,7 @@ public class DBInteraction {
     protected Connection connection;
     protected String dbName;
     protected static Scanner scanner = new Scanner(System.in);
+    public String file_path = "C:\\Users\\Antonova Alena\\Downloads\\lab1.xlsx";
 
     // почему нет типа данных???
     public DBInteraction(String dbName) {
@@ -139,45 +149,69 @@ public class DBInteraction {
 
     }
 
-
-
     public void printAllData() {
         if (this.connectionCheck()) {
             try {
                 DatabaseMetaData metaData = connection.getMetaData();
                 String[] types = {"TABLE"};
                 ResultSet tables = metaData.getTables(connection.getCatalog(), null, "%", types);
+                // 4. Создаем Excel workbook
+                Workbook workbook = new XSSFWorkbook();
+
                 while (tables.next()) {
                     String tableName = tables.getString("TABLE_NAME");
                     System.out.println("\n -- " + tableName + " -- ");
                     String sql = "SELECT * FROM " + tableName;
                     PreparedStatement statement = connection.prepareStatement(sql);
                     ResultSet resultSet = statement.executeQuery(sql);
+
+                    // создание страницы для таблицы
+                    Sheet sheet = workbook.createSheet(tableName);
+
                     ResultSetMetaData tableMetaData = resultSet.getMetaData();
                     int columnCount = tableMetaData.getColumnCount();
-
-                    // вывод названия колонок
+                    Row headerRow = sheet.createRow(0);
+                    // выводим названия колонок
+                    // записываем заголовки столбцов в Excel
                     for (int i = 1; i <= columnCount; i++) {
-                        System.out.print(tableMetaData.getColumnName(i) + ";  "); // Adjust width for readability
+                        System.out.print(tableMetaData.getColumnName(i) + ";  ");
+                        Cell cell = headerRow.createCell(i - 1);
+                        cell.setCellValue(tableMetaData.getColumnName(i));
                     }
                     System.out.println();
 
-                    // вывод типа колонок
+                    // выводим типы колонок в консоль
                     for (int i = 1; i <= columnCount; i++) {
-                        System.out.print(tableMetaData.getColumnTypeName(i) + ";  "); // Adjust width for readability
+                        System.out.print(tableMetaData.getColumnTypeName(i) + ";  ");
                     }
                     System.out.println();
 
-                    // вывод данных колонок
+                    // выводим данные колонок в консоль
+                    // записываем данные из ResultSet в Excel
+                    int rowNum = 1;
                     while (resultSet.next()) {
+                        Row row = sheet.createRow(rowNum++);
                         for (int i = 1; i <= columnCount; i++) {
-                            System.out.print(resultSet.getString(i) + ";  "); // Use getString for generic handling
+                            System.out.print(resultSet.getString(i) + ";  ");
+                            Cell cell = row.createCell(i - 1);
+                            cell.setCellValue(resultSet.getString(i));
                         }
                         System.out.println();
                     }
-                }
 
-            } catch (SQLException e) {
+                    // Записываем workbook в файл
+                    try {
+                        FileOutputStream outputStream = new FileOutputStream(this.file_path);
+                        workbook.write(outputStream);
+                    } catch (IOException e) {
+                        System.out.println("Возникли проблемы с сохранением данных в файл  " + e.getMessage());
+                    }
+
+                 //   System.out.println("Данные успешно экспортированы в файл: " + this.file_path);
+                }
+                workbook.close();
+
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }
