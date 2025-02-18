@@ -1,10 +1,9 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-// разобраться с break;
 
 public class Main {
-    protected static DBInteraction  db;
+    protected static DBInteraction  db; //  для базы данных с которой работаем (lab1)
     protected static String wrongChoiceMsg = "Выбранного пункта меню не существует!";
     protected static Scanner scanner = new Scanner(System.in);
 
@@ -57,16 +56,17 @@ public class Main {
         return true;
     }
 
+    // выбор типа данных и математические операции над числами:
     protected static void sum(String type){
         //1.Byte 2.Integer 3.Float
         switch (type) {
             case "1":
                 byte[] byteAb = {0, 0};
                 byte byteRes;
-                if (Main.validNumbers(byteAb)) {
+                if (Main.validNumbers(byteAb)) {  // заполнение массива и проверка на корректность введенных данных
                     byteRes = (byte) (byteAb[0] + byteAb[1]);
                     System.out.println(byteRes);
-                    db.insertValue(byteRes);
+                    db.insertValue(byteRes);  // сохранение результата в бд
                 }
                 break;
             case "2":
@@ -294,9 +294,9 @@ public class Main {
         }
     }
 
-
+    // взаимодействие с пользователем
     protected static void interaction() {
-        // взаимодействие с пользователем, выбор действия из меню; concatenation block
+        // concatenation block:
         String choices = """ 
                 
                 1. Вывести все таблицы из MySQL.
@@ -313,9 +313,9 @@ public class Main {
                 :\s""";
 
         String types = "1. Byte\n2. Integer\n3. Float (через запятую)\n: ";
-
-        System.out.print(choices);  // это же не printf?
         String type; // номер выбранного типа данных
+
+        System.out.print(choices);
         String choice = scanner.next();  // номер выбранного пункта меню
         switch (choice) {
             case "1": // Вывести все таблицы из MySQL
@@ -367,8 +367,7 @@ public class Main {
                 Main.pow(type);
                 break;
             case "10": // Сохранить данные из MySQL в Excel и вывести на экран.
-
-                db.printAllData();
+                db.toExcelAndPrint();
                 break;
             case "11": // Выход из программы
                 return;
@@ -378,8 +377,9 @@ public class Main {
         Main.interaction();
     }
 
+    // установление взаимодействия с бд и начало работы с пользователем
     public static void main(String[] args) {
-        db = new DBInteraction("lab1");  // подключаемся к базе данных
+        db = new DBInteraction("lab1");  // установление взаимодействия с бд
         Main.interaction();  // начинаем работать с пользователем
     }
 }
