@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class Main {
     protected static DBInteraction  db;
+    protected static String wrongChoiceMsg = "Выбранного пункта меню не существует!";
     protected static Scanner scanner = new Scanner(System.in);
 
     // проверка: введены ли байты, заполнение массива из двух байтов
@@ -57,10 +58,10 @@ public class Main {
     }
 
     protected static void sum(String type){
-        System.out.println("a + b");
+        //1.Byte 2.Integer 3.Float
         switch (type) {
             case "1":
-                byte[] byteAb = {0, 0};  // чтобы не ругался на инициализацию
+                byte[] byteAb = {0, 0};
                 byte byteRes;
                 if (Main.validNumbers(byteAb)) {
                     byteRes = (byte) (byteAb[0] + byteAb[1]);
@@ -69,7 +70,7 @@ public class Main {
                 }
                 break;
             case "2":
-                int[] intAb = {0, 0};  // чтобы не ругался на инициализацию
+                int[] intAb = {0, 0};
                 int intRes;
                 if (Main.validNumbers(intAb)) {
                     intRes = intAb[0] + intAb[1];
@@ -86,13 +87,15 @@ public class Main {
                     db.insertValue(floatRes);
                 }
                 break;
+            default:
+                System.out.println(wrongChoiceMsg);
         }
     }
     protected static void subt(String type){
-        System.out.println("a - b");
+        //1.Byte 2.Integer 3.Float
         switch (type) {
             case "1":
-                byte[] byteAb = {0, 0};  // чтобы не ругался на инициализацию
+                byte[] byteAb = {0, 0};
                 byte byteRes;
                 if (Main.validNumbers(byteAb)) {
                     byteRes = (byte) (byteAb[0] - byteAb[1]);
@@ -101,7 +104,7 @@ public class Main {
                 }
                 break;
             case "2":
-                int[] intAb = {0, 0};  // чтобы не ругался на инициализацию
+                int[] intAb = {0, 0};
                 int intRes;
                 if (Main.validNumbers(intAb)) {
                     intRes = intAb[0] - intAb[1];
@@ -110,7 +113,7 @@ public class Main {
                 }
                 break;
             case "3":
-                float[] floatAb = {0, 0};  // чтобы не ругался на инициализацию
+                float[] floatAb = {0, 0};
                 float floatRes;
                 if (Main.validNumbers(floatAb)) {
                     floatRes = floatAb[0] - floatAb[1];
@@ -118,13 +121,15 @@ public class Main {
                     db.insertValue(floatRes);
                 }
                 break;
+            default:
+                System.out.println(wrongChoiceMsg);
         }
     }
     protected static void mult(String type){
-        System.out.println("a * b");
+        //1.Byte 2.Integer 3.Float
         switch (type) {
             case "1":
-                byte[] byteAb = {0, 0};  // чтобы не ругался на инициализацию
+                byte[] byteAb = {0, 0};
                 byte byteRes;
                 if (Main.validNumbers(byteAb)) {
                     byteRes = (byte) (byteAb[0] * byteAb[1]);
@@ -133,7 +138,7 @@ public class Main {
                 }
                 break;
             case "2":
-                int[] intAb = {0, 0};  // чтобы не ругался на инициализацию
+                int[] intAb = {0, 0};
                 int intRes;
                 if (Main.validNumbers(intAb)) {
                     intRes = intAb[0] * intAb[1];
@@ -142,7 +147,7 @@ public class Main {
                 }
                 break;
             case "3":
-                float[] floatAb = {0, 0};  // чтобы не ругался на инициализацию
+                float[] floatAb = {0, 0};
                 float floatRes;
                 if (Main.validNumbers(floatAb)) {
                     floatRes = floatAb[0] * floatAb[1];
@@ -150,14 +155,16 @@ public class Main {
                     db.insertValue(floatRes);
                 }
                 break;
+            default:
+                System.out.println(wrongChoiceMsg);
         }
     }
     protected static void div(String type){
-        System.out.println("a / b  (результат float)");
+        //1.Byte 2.Integer 3.Float
         float floatRes;
         switch (type) {
             case "1":
-                byte[] byteAb = {0, 0};  // чтобы не ругался на инициализацию
+                byte[] byteAb = {0, 0};
                 if (Main.validNumbers(byteAb)) {
                     floatRes = (float)byteAb[0] / (float)byteAb[1];
                     System.out.println(floatRes);
@@ -165,7 +172,7 @@ public class Main {
                 }
                 break;
             case "2":
-                int[] intAb = {0, 0};  // чтобы не ругался на инициализацию
+                int[] intAb = {0, 0};
                 if (Main.validNumbers(intAb)) {
                     floatRes = (float)intAb[0] / (float)intAb[1];
                     System.out.println(floatRes);
@@ -173,20 +180,22 @@ public class Main {
                 }
                 break;
             case "3":
-                float[] floatAb = {0, 0};  // чтобы не ругался на инициализацию
+                float[] floatAb = {0, 0};
                 if (Main.validNumbers(floatAb)) {
                     floatRes = floatAb[0] / floatAb[1];
                     System.out.println(floatRes);
                     db.insertValue(floatRes);
                 }
                 break;
+            default:
+                System.out.println(wrongChoiceMsg);
         }
     }
     protected static void mod(String type){
-        System.out.println("a % b");
+        //1.Byte 2.Integer 3.Float
         switch (type) {
             case "1":
-                byte[] byteAb = {0, 0};  // чтобы не ругался на инициализацию
+                byte[] byteAb = {0, 0};
                 byte byteRes;
                 if (Main.validNumbers(byteAb)) {
                     byteRes = (byte) (byteAb[0] % byteAb[1]);
@@ -195,7 +204,7 @@ public class Main {
                 }
                 break;
             case "2":
-                int[] intAb = {0, 0};  // чтобы не ругался на инициализацию
+                int[] intAb = {0, 0};
                 int intRes;
                 if (Main.validNumbers(intAb)) {
                     intRes = intAb[0] % intAb[1];
@@ -204,7 +213,7 @@ public class Main {
                 }
                 break;
             case "3":
-                float[] floatAb = {0, 0};  // чтобы не ругался на инициализацию
+                float[] floatAb = {0, 0};
                 float floatRes;
                 if (Main.validNumbers(floatAb)) {
                     floatRes = floatAb[0] % floatAb[1];
@@ -212,13 +221,15 @@ public class Main {
                     db.insertValue(floatRes);
                 }
                 break;
+            default:
+                System.out.println(wrongChoiceMsg);
         }
     }
-    protected static void myAbs(String type){
-        System.out.println("|a|");
+    protected static void abs(String type){
+        //1.Byte 2.Integer 3.Float
         switch (type) {
             case "1":
-                byte[] byteA = {0};  // чтобы не ругался на инициализацию
+                byte[] byteA = {0};
                 byte byteRes;
                 if (Main.validNumbers(byteA)) {
                     byteRes = (byte) Math.abs(byteA[0]);
@@ -227,7 +238,7 @@ public class Main {
                 }
                 break;
             case "2":
-                int[] intA = {0};  // чтобы не ругался на инициализацию
+                int[] intA = {0};
                 int intRes;
                 if (Main.validNumbers(intA)) {
                     intRes = Math.abs(intA[0]);
@@ -236,7 +247,7 @@ public class Main {
                 }
                 break;
             case "3":
-                float[] floatA = {0};  // чтобы не ругался на инициализацию
+                float[] floatA = {0};
                 float floatRes;
                 if (Main.validNumbers(floatA)) {
                     floatRes = Math.abs(floatA[0]);
@@ -244,13 +255,15 @@ public class Main {
                     db.insertValue(floatRes);
                 }
                 break;
+            default:
+                System.out.println(wrongChoiceMsg);
         }
     }
-    protected static void myPow(String type){
-        System.out.println("a^b");
+    protected static void pow(String type){
+        //1.Byte 2.Integer 3.Float
         switch (type) {
             case "1":
-                byte[] byteAb = {0, 0};  // чтобы не ругался на инициализацию
+                byte[] byteAb = {0, 0};
                 byte byteRes;
                 if (Main.validNumbers(byteAb)) {
                     byteRes = (byte) Math.pow(byteAb[0], byteAb[1]);
@@ -259,7 +272,7 @@ public class Main {
                 }
                 break;
             case "2":
-                int[] intAb = {0, 0};  // чтобы не ругался на инициализацию
+                int[] intAb = {0, 0};
                 int intRes;
                 if (Main.validNumbers(intAb)) {
                     intRes = (int) Math.pow(intAb[0], intAb[1]);
@@ -268,7 +281,7 @@ public class Main {
                 }
                 break;
             case "3":
-                float[] floatAb = {0, 0};  // чтобы не ругался на инициализацию
+                float[] floatAb = {0, 0};
                 float floatRes;
                 if (Main.validNumbers(floatAb)) {
                     floatRes = (float) Math.pow(floatAb[0], floatAb[1]);
@@ -276,6 +289,8 @@ public class Main {
                     db.insertValue(floatRes);
                 }
                 break;
+            default:
+                System.out.println(wrongChoiceMsg);
         }
     }
 
@@ -295,65 +310,68 @@ public class Main {
                 "11. Выйти из программы\n" +
                 ": ";
 
-        String types = "1. Byte\n2. Integer\n3. Float (через запятую)";
+        String types = "1. Byte\n2. Integer\n3. Float (через запятую)\n: ";
 
         System.out.print(choices);  // это же не printf?
-        int choice = -1;  // -1 когда выбор пункта из меню неправильный(невозможный)
-        String type; // тип данных для работы
-        try{
-            choice = scanner.nextInt();
-        } catch (InputMismatchException e){
-            scanner.nextLine();
-            System.out.println("Выбранного пункта меню не существует!");
-        }
-
+        String type; // номер выбранного типа данных
+        String choice = scanner.next();  // номер выбранного пункта меню
         switch (choice) {
-            case 1: // Вывести все таблицы из MySQL
-                db.printTables();
+            case "1": // Вывести все таблицы из MySQL
+                db.printTableNames();
                 break;
-            case 2: // Создать таблицу в MySQL.
+            case "2": // Создать таблицу в MySQL.
                 db.createTable();
                 break;
-            case 3: // Сложение чисел, результат сохранить в MySQL с последующим выводом в консоль.
-                System.out.println(types);
+            case "3": // Сложение чисел, результат сохранить в MySQL с последующим выводом в консоль.
+                System.out.println("\na + b  (результат соответствующего типа)");
+                System.out.print(types);
                 type = scanner.next();
                 Main.sum(type);
                 break;
-            case 4: // Вычитание чисел, результат сохранить в MySQL с последующим выводом в консоль
-                System.out.println(types);
+            case "4": // Вычитание чисел, результат сохранить в MySQL с последующим выводом в консоль
+                System.out.println("\na - b  (результат соответствующего типа)");
+                System.out.print(types);
                 type = scanner.next();
                 Main.subt(type);
                 break;
-            case 5: // Умножение чисел, результат сохранить в MySQL с последующим выводом в консоль.
-                System.out.println(types);
+            case "5": // Умножение чисел, результат сохранить в MySQL с последующим выводом в консоль.
+                System.out.println("\na * b  (результат соответствующего типа)");
+                System.out.print(types);
                 type = scanner.next();
                 Main.mult(type);
                 break;
-            case 6: // Деление чисел, результат сохранить в MySQL с последующим выводом в консоль.
-                System.out.println(types);
+            case "6": // Деление чисел, результат сохранить в MySQL с последующим выводом в консоль.
+                System.out.println("\na / b  (результат типа float)");
+                System.out.print(types);
                 type = scanner.next();
                 Main.div(type);
                 break;
-            case 7: // Деление чисел по модулю (остаток), результат сохранить в MySQL с последующим выводом в консоль.
-                System.out.println(types);
+            case "7": // Деление чисел по модулю (остаток), результат сохранить в MySQL с последующим выводом в консоль.
+                System.out.println("\na % b  (результат соответствующего типа)");
+                System.out.print(types);
                 type = scanner.next();
                 Main.mod(type);
                 break;
-            case 8: // Возведение числа в модуль, результат сохранить в MySQL с последующим выводом в консоль.
-                System.out.println(types);
+            case "8": // Возведение числа в модуль, результат сохранить в MySQL с последующим выводом в консоль.
+                System.out.println("\n|a| (результат соответствующего типа)");
+                System.out.print(types);
                 type = scanner.next();
-                Main.myAbs(type);
+                Main.abs(type);
                 break;
-            case 9: // Возведение числа в степень, результат сохранить в MySQL с последующим выводом в консоль.
-                System.out.println(types);
+            case "9": // Возведение числа в степень, результат сохранить в MySQL с последующим выводом в консоль.
+                System.out.println("\na^b  (результат соответствующего типа)");
+                System.out.print(types);
                 type = scanner.next();
-                Main.myPow(type);
+                Main.pow(type);
                 break;
-            case 10: // Сохранить данные из MySQL в Excel и вывести на экран.
+            case "10": // Сохранить данные из MySQL в Excel и вывести на экран.
 
+                db.printAllData();
                 break;
-            case 11: // Выход из программы
+            case "11": // Выход из программы
                 return;
+            default:
+                System.out.println(wrongChoiceMsg);
         }
         Main.interaction();
     }
