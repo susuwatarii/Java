@@ -1,17 +1,19 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Main {
-    protected static DBInteraction  db; //  для базы данных с которой работаем (lab1)
-    protected static String wrongChoiceMsg = "Выбранного пункта меню не существует!";
-    protected static Scanner scanner = new Scanner(System.in);
-    protected static String getTableName() {
+
+public class Main { // не буду наследовать, возможно буду использовать некоторые методы
+    private static DBInteraction  db; //  для базы данных с которой работаем (lab1)
+    private static final String wrongChoiceMsg = "Выбранного пункта меню не существует!";
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static String getTableName() {
         System.out.println("Название таблицы в которою нужно сохранить результат: ");
         return scanner.next();
     }
 
     // проверка: введены ли байты, заполнение массива из двух байтов
-    protected static boolean validNumbers(byte[] byteArr){
+    public static boolean validNumbers(byte[] byteArr){
         try {
             System.out.print("a: ");
             byteArr[0] = scanner.nextByte();
@@ -27,7 +29,7 @@ public class Main {
         return true;
     }
     // проверка: введены ли вещественные числа, заполнение массива из двух float
-    protected static boolean validNumbers(float[] floatArr){
+    public static boolean validNumbers(float[] floatArr){
         try {
             System.out.print("a: ");
             floatArr[0] = scanner.nextFloat();
@@ -43,7 +45,7 @@ public class Main {
         return true;
     }
     // проверка: введены ли целые числа, заполнение массива из двух int
-    protected static boolean validNumbers(int[] intArr){
+    public static boolean validNumbers(int[] intArr){
         try {
             System.out.print("a: ");
             intArr[0] = scanner.nextInt();
@@ -60,7 +62,7 @@ public class Main {
     }
 
     // выбор типа данных и математические операции над числами:
-    protected static void sum(String type){
+    private static void sum(String type){
         //1.Byte 2.Integer 3.Float
         switch (type) {
             case "1":
@@ -94,7 +96,7 @@ public class Main {
                 System.out.println(wrongChoiceMsg);
         }
     }
-    protected static void subt(String type){
+    private static void subt(String type){
         //1.Byte 2.Integer 3.Float
         switch (type) {
             case "1":
@@ -128,7 +130,7 @@ public class Main {
                 System.out.println(wrongChoiceMsg);
         }
     }
-    protected static void mult(String type){
+    private static void mult(String type){
         //1.Byte 2.Integer 3.Float
         switch (type) {
             case "1":
@@ -162,13 +164,17 @@ public class Main {
                 System.out.println(wrongChoiceMsg);
         }
     }
-    protected static void div(String type){
+    private static void div(String type){
         //1.Byte 2.Integer 3.Float
         float floatRes;
         switch (type) {
             case "1":
                 byte[] byteAb = {0, 0};
                 if (Main.validNumbers(byteAb)) {
+                    if (byteAb[1] == 0) {
+                        System.out.println("На ноль делить нельзя! ");
+                        return;
+                    }
                     floatRes = (float)byteAb[0] / (float)byteAb[1];
                     System.out.println(floatRes);
                     db.insertValue(floatRes, Main.getTableName());
@@ -177,6 +183,10 @@ public class Main {
             case "2":
                 int[] intAb = {0, 0};
                 if (Main.validNumbers(intAb)) {
+                    if (intAb[1] == 0) {
+                        System.out.println("На ноль делить нельзя! ");
+                        return;
+                    }
                     floatRes = (float)intAb[0] / (float)intAb[1];
                     System.out.println(floatRes);
                     db.insertValue(floatRes, Main.getTableName());
@@ -185,6 +195,10 @@ public class Main {
             case "3":
                 float[] floatAb = {0, 0};
                 if (Main.validNumbers(floatAb)) {
+                    if (floatAb[1] == 0) {
+                        System.out.println("На ноль делить нельзя! ");
+                        return;
+                    }
                     floatRes = floatAb[0] / floatAb[1];
                     System.out.println(floatRes);
                     db.insertValue(floatRes, Main.getTableName());
@@ -194,13 +208,17 @@ public class Main {
                 System.out.println(wrongChoiceMsg);
         }
     }
-    protected static void mod(String type){
+    private static void mod(String type){
         //1.Byte 2.Integer 3.Float
         switch (type) {
             case "1":
                 byte[] byteAb = {0, 0};
                 byte byteRes;
                 if (Main.validNumbers(byteAb)) {
+                    if (byteAb[1] == 0) {
+                        System.out.println("На ноль делить нельзя! ");
+                        return;
+                    }
                     byteRes = (byte) (byteAb[0] % byteAb[1]);
                     System.out.println(byteRes);
                     db.insertValue(byteRes, Main.getTableName());
@@ -210,6 +228,10 @@ public class Main {
                 int[] intAb = {0, 0};
                 int intRes;
                 if (Main.validNumbers(intAb)) {
+                    if (intAb[1] == 0) {
+                        System.out.println("На ноль делить нельзя! ");
+                        return;
+                    }
                     intRes = intAb[0] % intAb[1];
                     System.out.println(intRes);
                     db.insertValue(intRes, Main.getTableName());
@@ -219,6 +241,10 @@ public class Main {
                 float[] floatAb = {0, 0};
                 float floatRes;
                 if (Main.validNumbers(floatAb)) {
+                    if (floatAb[1] == 0) {
+                        System.out.println("На ноль делить нельзя! ");
+                        return;
+                    }
                     floatRes = floatAb[0] % floatAb[1];
                     System.out.println(floatRes);
                     db.insertValue(floatRes, Main.getTableName());
@@ -228,7 +254,7 @@ public class Main {
                 System.out.println(wrongChoiceMsg);
         }
     }
-    protected static void abs(String type){
+    private static void abs(String type){
         //1.Byte 2.Integer 3.Float
         switch (type) {
             case "1":
@@ -262,7 +288,7 @@ public class Main {
                 System.out.println(wrongChoiceMsg);
         }
     }
-    protected static void pow(String type){
+    private static void pow(String type){
         //1.Byte 2.Integer 3.Float
         switch (type) {
             case "1":
@@ -298,7 +324,7 @@ public class Main {
     }
 
     // взаимодействие с пользователем
-    protected static void interaction() {
+    private static void interaction() {
         // concatenation block:
         String choices = """ 
                 
@@ -325,7 +351,21 @@ public class Main {
                 db.printTableNames();
                 break;
             case "2": // Создать таблицу в MySQL.
-                db.createTable(Main.getTableName());
+                System.out.println("Тип столбца, например:\n1. int\n2. float\n3. varchar(255)");
+                String dataType = scanner.next();
+                switch (dataType) {
+                    case "1":
+                        db.createTable(Main.getTableName(), "int");
+                        break;
+                    case "2":
+                        db.createTable(Main.getTableName(), "float");
+                        break;
+                    case "3":
+                        db.createTable(Main.getTableName(), "varchar(255)");
+                        break;
+                    default:
+                        System.out.println(Main.wrongChoiceMsg);
+                }
                 break;
             case "3": // Сложение чисел, результат сохранить в MySQL с последующим выводом в консоль.
                 System.out.println("\na + b  (результат соответствующего типа)");

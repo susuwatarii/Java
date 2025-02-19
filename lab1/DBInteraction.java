@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 
 // взаимодействие с выбранной базой данных
-public class DBInteraction {
+public class DBInteraction {  //  будет наследование, если возникнет потребность расширить функционал
     protected boolean connected = false; // получилось ли подключиться к бд
     protected Connection connection;
     protected final String dbName;
@@ -55,12 +55,9 @@ public class DBInteraction {
     }
 
     // создание таблицы с заданным именем; id генерируется автоматически, второй столбец имеет имя result
-    public void createTable(String tableName) {
+    public void createTable(String tableName, String dataType) {
         if (this.connectionCheck()) {
             try {
-                System.out.println("Тип столбца, например:\nint, varchar(255), float");
-                String dataType = scanner.nextLine();
-
                 // создаем sql запрос
                 String sql = "CREATE TABLE IF NOT EXISTS `" + tableName + "` (id INT PRIMARY KEY AUTO_INCREMENT, result " + dataType + ")";
                 PreparedStatement statement = connection.prepareStatement(sql);
@@ -79,7 +76,7 @@ public class DBInteraction {
     public void insertValue(int intValue, String tableName) {
         if (this.connectionCheck()) {
             try {
-                String sql = "INSERT INTO " + tableName + " (result) VALUES (?)"; // ? - заполнитель, подставляются данные
+                String sql = "INSERT INTO `" + tableName + "` (result) VALUES (?)"; // ? - заполнитель, подставляются данные
                 PreparedStatement statement = connection.prepareStatement(sql);
                 statement.setInt(1, intValue); // индексация параметров с 1
                 statement.executeUpdate();
@@ -95,7 +92,7 @@ public class DBInteraction {
     public void insertValue(float floatValue, String tableName) {
         if (this.connectionCheck()) {
             try {
-                String sql = "INSERT INTO " + tableName + " (result) VALUES (?)"; // ? - заполнитель, подставляются данные
+                String sql = "INSERT INTO `" + tableName + "` (result) VALUES (?)"; // ? - заполнитель, подставляются данные
                 PreparedStatement statement = connection.prepareStatement(sql);
                 statement.setFloat(1, floatValue); // индексация параметров с 1
                 statement.executeUpdate();
@@ -111,7 +108,7 @@ public class DBInteraction {
     public void insertValue(String strValue, String tableName) {
         if (this.connectionCheck()) {
             try {
-                String sql = "INSERT INTO " + tableName + " (result) VALUES (?)"; // ? - заполнитель, подставляются данные
+                String sql = "INSERT INTO `" + tableName + "` (result) VALUES (?)"; // ? - заполнитель, подставляются данные
                 PreparedStatement statement = connection.prepareStatement(sql);
                 statement.setString(1, strValue); // индексация параметров с 1
                 statement.executeUpdate();
@@ -162,7 +159,7 @@ public class DBInteraction {
                     // получение данных таблицы
                     String tableName = tables.getString("TABLE_NAME");
                     System.out.println("\n -- " + tableName + " -- ");
-                    String sql = "SELECT * FROM " + tableName;
+                    String sql = "SELECT * FROM `" + tableName + "`";
                     PreparedStatement statement = connection.prepareStatement(sql);
                     ResultSet resultSet = statement.executeQuery(sql);
                     ResultSetMetaData tableMetaData = resultSet.getMetaData();
