@@ -17,7 +17,15 @@ public class DBInteraction {
     protected Connection connection;
     protected final String dbName;
     protected static Scanner scanner = new Scanner(System.in);
-    public String filePath = "C:\\Users\\Antonova Alena\\Downloads\\lab1.xlsx"; // файл excel куда сохраняются данные
+    private String filePath; // файл excel куда сохраняются данные
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public String getFilePath() {
+        return this.filePath = filePath;
+    }
 
     public DBInteraction(String dbName) {
         this.dbName = dbName;
@@ -47,16 +55,14 @@ public class DBInteraction {
     }
 
     // создание таблицы с заданным именем; id генерируется автоматически, второй столбец имеет имя result
-    public void createTable() {
+    public void createTable(String tableName) {
         if (this.connectionCheck()) {
             try {
-                System.out.println("Enter the name of your table");
-                String tableName = scanner.nextLine();
-                System.out.println("Тип столбца, например:\ninteger, varchar(255), float");
+                System.out.println("Тип столбца, например:\nint, varchar(255), float");
                 String dataType = scanner.nextLine();
 
                 // создаем sql запрос
-                String sql = "CREATE TABLE IF NOT EXISTS " + tableName + " (id INT PRIMARY KEY AUTO_INCREMENT, result " + dataType + ")";
+                String sql = "CREATE TABLE IF NOT EXISTS `" + tableName + "` (id INT PRIMARY KEY AUTO_INCREMENT, result " + dataType + ")";
                 PreparedStatement statement = connection.prepareStatement(sql);
                 statement.executeUpdate();
 
@@ -64,17 +70,14 @@ public class DBInteraction {
                 System.out.println("Таблица не создана!\n" + e.getMessage());
                 return;
             }
-            System.out.println("Таблица создана  или уже существует");
+            System.out.println("Таблица создана или уже существует");
         }
     }
 
     // байтовый тип данных - целые числа от -128 до 127 (включительно), поэтому в бд записываем как integer
     // добавление Целого числа в таблицу
-    public void insertValue(int intValue) {
+    public void insertValue(int intValue, String tableName) {
         if (this.connectionCheck()) {
-            System.out.println("Enter the name of your table");
-            String tableName = scanner.nextLine();
-
             try {
                 String sql = "INSERT INTO " + tableName + " (result) VALUES (?)"; // ? - заполнитель, подставляются данные
                 PreparedStatement statement = connection.prepareStatement(sql);
@@ -89,11 +92,8 @@ public class DBInteraction {
     }
 
     // добавление Вещественного числа в таблицу
-    public void insertValue(float floatValue) {
+    public void insertValue(float floatValue, String tableName) {
         if (this.connectionCheck()) {
-            System.out.println("Enter the name of your table");
-            String tableName = scanner.nextLine();
-
             try {
                 String sql = "INSERT INTO " + tableName + " (result) VALUES (?)"; // ? - заполнитель, подставляются данные
                 PreparedStatement statement = connection.prepareStatement(sql);
@@ -108,11 +108,8 @@ public class DBInteraction {
     }
 
     // добавление Строки в таблицу
-    public void insertValue(String strValue) {
+    public void insertValue(String strValue, String tableName) {
         if (this.connectionCheck()) {
-            System.out.println("Enter the name of your table");
-            String tableName = scanner.nextLine();
-
             try {
                 String sql = "INSERT INTO " + tableName + " (result) VALUES (?)"; // ? - заполнитель, подставляются данные
                 PreparedStatement statement = connection.prepareStatement(sql);
@@ -130,6 +127,7 @@ public class DBInteraction {
     public void printTableNames() {
         if (this.connectionCheck()) {
             // Получаем объект DatabaseMetaData
+            System.out.println("База данных: " + this.dbName);
             try {
                 System.out.println("Список таблиц:");
                 DatabaseMetaData metaData = connection.getMetaData();
@@ -206,8 +204,10 @@ public class DBInteraction {
                     try {
                         FileOutputStream outputStream = new FileOutputStream(this.filePath);
                         workbook.write(outputStream);
+                        System.out.println("Таблица сохранена в " + this.getFilePath());
                     } catch (IOException e) {
-                        System.out.println("Возникли проблемы с сохранением данных в файл.  " + e.getMessage());
+                        System.out.println("Возникли проблемы с сохранением таблицы " + tableName  + " в файл  " + this.getFilePath());
+                        System.out.println(e.getMessage());
                     }
                 }
                 workbook.close();

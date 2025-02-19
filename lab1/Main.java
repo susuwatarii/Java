@@ -1,11 +1,14 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-
 public class Main {
     protected static DBInteraction  db; //  для базы данных с которой работаем (lab1)
     protected static String wrongChoiceMsg = "Выбранного пункта меню не существует!";
     protected static Scanner scanner = new Scanner(System.in);
+    protected static String getTableName() {
+        System.out.println("Название таблицы в которою нужно сохранить результат: ");
+        return scanner.next();
+    }
 
     // проверка: введены ли байты, заполнение массива из двух байтов
     protected static boolean validNumbers(byte[] byteArr){
@@ -66,7 +69,7 @@ public class Main {
                 if (Main.validNumbers(byteAb)) {  // заполнение массива и проверка на корректность введенных данных
                     byteRes = (byte) (byteAb[0] + byteAb[1]);
                     System.out.println(byteRes);
-                    db.insertValue(byteRes);  // сохранение результата в бд
+                    db.insertValue(byteRes, Main.getTableName());  // сохранение результата в бд
                 }
                 break;
             case "2":
@@ -75,7 +78,7 @@ public class Main {
                 if (Main.validNumbers(intAb)) {
                     intRes = intAb[0] + intAb[1];
                     System.out.println(intRes);
-                    db.insertValue(intRes);
+                    db.insertValue(intRes, Main.getTableName());
                 }
                 break;
             case "3":
@@ -84,7 +87,7 @@ public class Main {
                 if (Main.validNumbers(floatAb)) {
                     floatRes = floatAb[0] + floatAb[1];
                     System.out.println(floatRes);
-                    db.insertValue(floatRes);
+                    db.insertValue(floatRes, Main.getTableName());
                 }
                 break;
             default:
@@ -100,7 +103,7 @@ public class Main {
                 if (Main.validNumbers(byteAb)) {
                     byteRes = (byte) (byteAb[0] - byteAb[1]);
                     System.out.println(byteRes);
-                    db.insertValue(byteRes);
+                    db.insertValue(byteRes, Main.getTableName());
                 }
                 break;
             case "2":
@@ -109,7 +112,7 @@ public class Main {
                 if (Main.validNumbers(intAb)) {
                     intRes = intAb[0] - intAb[1];
                     System.out.println(intRes);
-                    db.insertValue(intRes);
+                    db.insertValue(intRes, Main.getTableName());
                 }
                 break;
             case "3":
@@ -118,7 +121,7 @@ public class Main {
                 if (Main.validNumbers(floatAb)) {
                     floatRes = floatAb[0] - floatAb[1];
                     System.out.println(floatRes);
-                    db.insertValue(floatRes);
+                    db.insertValue(floatRes, Main.getTableName());
                 }
                 break;
             default:
@@ -134,7 +137,7 @@ public class Main {
                 if (Main.validNumbers(byteAb)) {
                     byteRes = (byte) (byteAb[0] * byteAb[1]);
                     System.out.println(byteRes);
-                    db.insertValue(byteRes);
+                    db.insertValue(byteRes, Main.getTableName());
                 }
                 break;
             case "2":
@@ -143,7 +146,7 @@ public class Main {
                 if (Main.validNumbers(intAb)) {
                     intRes = intAb[0] * intAb[1];
                     System.out.println(intRes);
-                    db.insertValue(intRes);
+                    db.insertValue(intRes, Main.getTableName());
                 }
                 break;
             case "3":
@@ -152,7 +155,7 @@ public class Main {
                 if (Main.validNumbers(floatAb)) {
                     floatRes = floatAb[0] * floatAb[1];
                     System.out.println(floatRes);
-                    db.insertValue(floatRes);
+                    db.insertValue(floatRes, Main.getTableName());
                 }
                 break;
             default:
@@ -168,7 +171,7 @@ public class Main {
                 if (Main.validNumbers(byteAb)) {
                     floatRes = (float)byteAb[0] / (float)byteAb[1];
                     System.out.println(floatRes);
-                    db.insertValue(floatRes);
+                    db.insertValue(floatRes, Main.getTableName());
                 }
                 break;
             case "2":
@@ -176,7 +179,7 @@ public class Main {
                 if (Main.validNumbers(intAb)) {
                     floatRes = (float)intAb[0] / (float)intAb[1];
                     System.out.println(floatRes);
-                    db.insertValue(floatRes);
+                    db.insertValue(floatRes, Main.getTableName());
                 }
                 break;
             case "3":
@@ -184,7 +187,7 @@ public class Main {
                 if (Main.validNumbers(floatAb)) {
                     floatRes = floatAb[0] / floatAb[1];
                     System.out.println(floatRes);
-                    db.insertValue(floatRes);
+                    db.insertValue(floatRes, Main.getTableName());
                 }
                 break;
             default:
@@ -200,7 +203,7 @@ public class Main {
                 if (Main.validNumbers(byteAb)) {
                     byteRes = (byte) (byteAb[0] % byteAb[1]);
                     System.out.println(byteRes);
-                    db.insertValue(byteRes);
+                    db.insertValue(byteRes, Main.getTableName());
                 }
                 break;
             case "2":
@@ -209,7 +212,7 @@ public class Main {
                 if (Main.validNumbers(intAb)) {
                     intRes = intAb[0] % intAb[1];
                     System.out.println(intRes);
-                    db.insertValue(intRes);
+                    db.insertValue(intRes, Main.getTableName());
                 }
                 break;
             case "3":
@@ -218,7 +221,7 @@ public class Main {
                 if (Main.validNumbers(floatAb)) {
                     floatRes = floatAb[0] % floatAb[1];
                     System.out.println(floatRes);
-                    db.insertValue(floatRes);
+                    db.insertValue(floatRes, Main.getTableName());
                 }
                 break;
             default:
@@ -234,7 +237,7 @@ public class Main {
                 if (Main.validNumbers(byteA)) {
                     byteRes = (byte) Math.abs(byteA[0]);
                     System.out.println(byteRes);
-                    db.insertValue(byteRes);
+                    db.insertValue(byteRes, Main.getTableName());
                 }
                 break;
             case "2":
@@ -243,7 +246,7 @@ public class Main {
                 if (Main.validNumbers(intA)) {
                     intRes = Math.abs(intA[0]);
                     System.out.println(intRes);
-                    db.insertValue(intRes);
+                    db.insertValue(intRes, Main.getTableName());
                 }
                 break;
             case "3":
@@ -252,7 +255,7 @@ public class Main {
                 if (Main.validNumbers(floatA)) {
                     floatRes = Math.abs(floatA[0]);
                     System.out.println(floatRes);
-                    db.insertValue(floatRes);
+                    db.insertValue(floatRes, Main.getTableName());
                 }
                 break;
             default:
@@ -268,7 +271,7 @@ public class Main {
                 if (Main.validNumbers(byteAb)) {
                     byteRes = (byte) Math.pow(byteAb[0], byteAb[1]);
                     System.out.println(byteRes);
-                    db.insertValue(byteRes);
+                    db.insertValue(byteRes, Main.getTableName());
                 }
                 break;
             case "2":
@@ -277,7 +280,7 @@ public class Main {
                 if (Main.validNumbers(intAb)) {
                     intRes = (int) Math.pow(intAb[0], intAb[1]);
                     System.out.println(intRes);
-                    db.insertValue(intRes);
+                    db.insertValue(intRes, Main.getTableName());
                 }
                 break;
             case "3":
@@ -286,7 +289,7 @@ public class Main {
                 if (Main.validNumbers(floatAb)) {
                     floatRes = (float) Math.pow(floatAb[0], floatAb[1]);
                     System.out.println(floatRes);
-                    db.insertValue(floatRes);
+                    db.insertValue(floatRes, Main.getTableName());
                 }
                 break;
             default:
@@ -322,7 +325,7 @@ public class Main {
                 db.printTableNames();
                 break;
             case "2": // Создать таблицу в MySQL.
-                db.createTable();
+                db.createTable(Main.getTableName());
                 break;
             case "3": // Сложение чисел, результат сохранить в MySQL с последующим выводом в консоль.
                 System.out.println("\na + b  (результат соответствующего типа)");
@@ -380,6 +383,7 @@ public class Main {
     // установление взаимодействия с бд и начало работы с пользователем
     public static void main(String[] args) {
         db = new DBInteraction("lab1");  // установление взаимодействия с бд
+        db.setFilePath("C:\\Users\\Antonova Alena\\Downloads\\lab1.xlsx");  // xlsx файл для сохранения данных
         Main.interaction();  // начинаем работать с пользователем
     }
 }
