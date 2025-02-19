@@ -2,10 +2,10 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
-public class Strings {
+public class Strings {  // скорее всего буду наследовать: дописать новые методы, скрыть (вместо переопределения) interaction()
     protected static DBInteraction  db; //  для базы данных с которой работаем (lab1)
-    protected static String wrongChoiceMsg = "Выбранного пункта меню не существует!";
-    protected static Scanner scanner = new Scanner(System.in);
+    protected static final String wrongChoiceMsg = "Выбранного пункта меню не существует!";
+    protected static final Scanner scanner = new Scanner(System.in);
     protected static String str1;
     protected static String str2;
 
@@ -35,7 +35,7 @@ public class Strings {
     }
 
     // Подсчитать размер ранее введенных строк, результат сохранить в MySQL с последующим выводом в консоль.
-    protected static void lenStrings() {
+    private static void lenStrings() {
         if (Strings.StringsAreEntered()) {
             String len1 = String.valueOf(str1.length());
             String len2 = String.valueOf(str2.length());
@@ -47,7 +47,7 @@ public class Strings {
     }
 
     // Объединить две строки в единое целое, результат сохранить в MySQL с последующим выводом в консоль.
-    protected static void concatStrings() {
+    private static void concatStrings() {
         if (Strings.StringsAreEntered()) {
             String res = str1 + str2 ;
             db.insertValue(res, Strings.getTableName());
@@ -56,7 +56,7 @@ public class Strings {
     }
 
     // Сравнить две ранее введенные строки, результат сохранить в MySQL с последующим выводом в консоль.
-    protected static void compStrings() {
+    private static void compStrings() {
         if (Strings.StringsAreEntered()) {
             String res2;
             if (str1.equals(str2)) {
@@ -95,7 +95,7 @@ public class Strings {
                 db.printTableNames();
                 break;
             case "2": // Создать таблицу в MySQL.
-                db.createTable(Strings.getTableName());
+                db.createTable(Strings.getTableName(), "varchar(255)");
                 break;
             case "3": // Ввести две строки с клавиатуры, результат сохранить в MySQL с последующим выводом в консоль.
                 Strings.enterStrings();
