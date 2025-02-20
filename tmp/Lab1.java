@@ -2,9 +2,6 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 //////////////////////////////    заменить проверку на 0
-/////////////////////////////    что-то не помню, не важно
-/////////////////////////////    убрать все наследование и доступ кроме как для бд
-/////////////////////////////    Lab2.printAndSave(res, Lab2.getTableName());
 
 public class Lab1 { // не буду наследовать, возможно буду использовать некоторые методы
     private static DBInteraction  db; //  для базы данных с которой работаем (lab1)
@@ -32,7 +29,7 @@ public class Lab1 { // не буду наследовать, возможно б
     }
 
     // проверка: введены ли байты, заполнение массива из двух байтов
-    public static boolean validNumbers(byte[] byteArr){
+    private static boolean validNumbers(byte[] byteArr){
         try {
             System.out.print("a: ");
             byteArr[0] = scanner.nextByte();
@@ -48,7 +45,7 @@ public class Lab1 { // не буду наследовать, возможно б
         return true;
     }
     // проверка: введены ли вещественные числа, заполнение массива из двух float
-    public static boolean validNumbers(float[] floatArr){
+    private static boolean validNumbers(float[] floatArr){
         try {
             System.out.print("a: ");
             floatArr[0] = scanner.nextFloat();
@@ -64,7 +61,7 @@ public class Lab1 { // не буду наследовать, возможно б
         return true;
     }
     // проверка: введены ли целые числа, заполнение массива из двух int
-    public static boolean validNumbers(int[] intArr){
+    private static boolean validNumbers(int[] intArr){
         try {
             System.out.print("a: ");
             intArr[0] = scanner.nextInt();

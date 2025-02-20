@@ -2,18 +2,18 @@ import java.util.Scanner;
 
 
 public class Lab2 {  // скорее всего буду наследовать: дописать новые методы, скрыть (вместо переопределения) interaction()
-    protected static DBInteraction  db; //  для базы данных с которой работаем (lab1)
-    protected static final String wrongChoiceMsg = "Выбранного пункта меню не существует!";
-    protected static final Scanner scanner = new Scanner(System.in);
-    protected static String str1;
-    protected static String str2;
+    private static DBInteraction  db; //  для базы данных с которой работаем (lab1)
+    private static final String wrongChoiceMsg = "Выбранного пункта меню не существует!";
+    private static final Scanner scanner = new Scanner(System.in);
+    private static String str1;
+    private static String str2;
 
-    protected static String getTableName() {
+    private static String getTableName() {
         System.out.println("Название таблицы в которою нужно сохранить результат: ");
         return scanner.next();
     }
 
-    protected static boolean StringsAreEntered() {
+    private static boolean StringsAreEntered() {
         if (str1 != null && str2 != null) {
             return true;
         }
@@ -28,7 +28,7 @@ public class Lab2 {  // скорее всего буду наследовать:
 
 
     // Ввести две строки с клавиатуры, результат сохранить в MySQL с последующим выводом в консоль.
-    protected static void enterStrings() {
+    private static void enterStrings() {
         System.out.print("Строка 1: ");
         scanner.nextLine();
         str1 = scanner.nextLine();
@@ -72,7 +72,7 @@ public class Lab2 {  // скорее всего буду наследовать:
     }
 
     // взаимодействие с пользователем
-    protected static void interaction() {
+    private static void interaction() {
         // concatenation block:
         String choices = """ 
                 
