@@ -1,6 +1,10 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+//////////////////////////////    заменить проверку на 0
+/////////////////////////////    что-то не помню, не важно
+/////////////////////////////    убрать все наследование и доступ кроме как для бд
+/////////////////////////////    Lab2.printAndSave(res, Lab2.getTableName());
 
 public class Lab1 { // не буду наследовать, возможно буду использовать некоторые методы
     private static DBInteraction  db; //  для базы данных с которой работаем (lab1)
@@ -10,6 +14,21 @@ public class Lab1 { // не буду наследовать, возможно б
     public static String getTableName() {
         System.out.println("Название таблицы в которою нужно сохранить результат: ");
         return scanner.next();
+    }
+
+    private static void printAndSave(byte number, String tableName) {
+        System.out.println(number);
+        db.insertValue(number, tableName);
+    }
+
+    private static void printAndSave(int number, String tableName) {
+        System.out.println(number);
+        db.insertValue(number, tableName);
+    }
+
+    private static void printAndSave(float number, String tableName) {
+        System.out.println(number);
+        db.insertValue(number, tableName);
     }
 
     // проверка: введены ли байты, заполнение массива из двух байтов
@@ -70,8 +89,7 @@ public class Lab1 { // не буду наследовать, возможно б
                 byte byteRes;
                 if (Lab1.validNumbers(byteAb)) {  // заполнение массива и проверка на корректность введенных данных
                     byteRes = (byte) (byteAb[0] + byteAb[1]);
-                    System.out.println(byteRes);
-                    db.insertValue(byteRes, Lab1.getTableName());  // сохранение результата в бд
+                    Lab1.printAndSave(byteRes, Lab1.getTableName());
                 }
                 break;
             case "2":
@@ -79,8 +97,7 @@ public class Lab1 { // не буду наследовать, возможно б
                 int intRes;
                 if (Lab1.validNumbers(intAb)) {
                     intRes = intAb[0] + intAb[1];
-                    System.out.println(intRes);
-                    db.insertValue(intRes, Lab1.getTableName());
+                    Lab1.printAndSave(intRes, Lab1.getTableName());
                 }
                 break;
             case "3":
@@ -88,8 +105,7 @@ public class Lab1 { // не буду наследовать, возможно б
                 float floatRes;
                 if (Lab1.validNumbers(floatAb)) {
                     floatRes = floatAb[0] + floatAb[1];
-                    System.out.println(floatRes);
-                    db.insertValue(floatRes, Lab1.getTableName());
+                    Lab1.printAndSave(floatRes, Lab1.getTableName());
                 }
                 break;
             default:
@@ -104,8 +120,7 @@ public class Lab1 { // не буду наследовать, возможно б
                 byte byteRes;
                 if (Lab1.validNumbers(byteAb)) {
                     byteRes = (byte) (byteAb[0] - byteAb[1]);
-                    System.out.println(byteRes);
-                    db.insertValue(byteRes, Lab1.getTableName());
+                    Lab1.printAndSave(byteRes, Lab1.getTableName());
                 }
                 break;
             case "2":
@@ -113,8 +128,7 @@ public class Lab1 { // не буду наследовать, возможно б
                 int intRes;
                 if (Lab1.validNumbers(intAb)) {
                     intRes = intAb[0] - intAb[1];
-                    System.out.println(intRes);
-                    db.insertValue(intRes, Lab1.getTableName());
+                    Lab1.printAndSave(intRes, Lab1.getTableName());
                 }
                 break;
             case "3":
@@ -122,8 +136,7 @@ public class Lab1 { // не буду наследовать, возможно б
                 float floatRes;
                 if (Lab1.validNumbers(floatAb)) {
                     floatRes = floatAb[0] - floatAb[1];
-                    System.out.println(floatRes);
-                    db.insertValue(floatRes, Lab1.getTableName());
+                    Lab1.printAndSave(floatRes, Lab1.getTableName());
                 }
                 break;
             default:
@@ -138,8 +151,7 @@ public class Lab1 { // не буду наследовать, возможно б
                 byte byteRes;
                 if (Lab1.validNumbers(byteAb)) {
                     byteRes = (byte) (byteAb[0] * byteAb[1]);
-                    System.out.println(byteRes);
-                    db.insertValue(byteRes, Lab1.getTableName());
+                    Lab1.printAndSave(byteRes, Lab1.getTableName());
                 }
                 break;
             case "2":
@@ -147,8 +159,7 @@ public class Lab1 { // не буду наследовать, возможно б
                 int intRes;
                 if (Lab1.validNumbers(intAb)) {
                     intRes = intAb[0] * intAb[1];
-                    System.out.println(intRes);
-                    db.insertValue(intRes, Lab1.getTableName());
+                    Lab1.printAndSave(intRes, Lab1.getTableName());
                 }
                 break;
             case "3":
@@ -156,8 +167,7 @@ public class Lab1 { // не буду наследовать, возможно б
                 float floatRes;
                 if (Lab1.validNumbers(floatAb)) {
                     floatRes = floatAb[0] * floatAb[1];
-                    System.out.println(floatRes);
-                    db.insertValue(floatRes, Lab1.getTableName());
+                    Lab1.printAndSave(floatRes, Lab1.getTableName());
                 }
                 break;
             default:
@@ -176,8 +186,7 @@ public class Lab1 { // не буду наследовать, возможно б
                         return;
                     }
                     floatRes = (float)byteAb[0] / (float)byteAb[1];
-                    System.out.println(floatRes);
-                    db.insertValue(floatRes, Lab1.getTableName());
+                    Lab1.printAndSave(floatRes, Lab1.getTableName());
                 }
                 break;
             case "2":
@@ -188,8 +197,7 @@ public class Lab1 { // не буду наследовать, возможно б
                         return;
                     }
                     floatRes = (float)intAb[0] / (float)intAb[1];
-                    System.out.println(floatRes);
-                    db.insertValue(floatRes, Lab1.getTableName());
+                    Lab1.printAndSave(floatRes, Lab1.getTableName());
                 }
                 break;
             case "3":
@@ -200,8 +208,7 @@ public class Lab1 { // не буду наследовать, возможно б
                         return;
                     }
                     floatRes = floatAb[0] / floatAb[1];
-                    System.out.println(floatRes);
-                    db.insertValue(floatRes, Lab1.getTableName());
+                    Lab1.printAndSave(floatRes, Lab1.getTableName());
                 }
                 break;
             default:
@@ -220,8 +227,7 @@ public class Lab1 { // не буду наследовать, возможно б
                         return;
                     }
                     byteRes = (byte) (byteAb[0] % byteAb[1]);
-                    System.out.println(byteRes);
-                    db.insertValue(byteRes, Lab1.getTableName());
+                    Lab1.printAndSave(byteRes, Lab1.getTableName());
                 }
                 break;
             case "2":
@@ -233,8 +239,7 @@ public class Lab1 { // не буду наследовать, возможно б
                         return;
                     }
                     intRes = intAb[0] % intAb[1];
-                    System.out.println(intRes);
-                    db.insertValue(intRes, Lab1.getTableName());
+                    Lab1.printAndSave(intRes, Lab1.getTableName());
                 }
                 break;
             case "3":
@@ -246,8 +251,7 @@ public class Lab1 { // не буду наследовать, возможно б
                         return;
                     }
                     floatRes = floatAb[0] % floatAb[1];
-                    System.out.println(floatRes);
-                    db.insertValue(floatRes, Lab1.getTableName());
+                    Lab1.printAndSave(floatRes, Lab1.getTableName());
                 }
                 break;
             default:
@@ -259,11 +263,10 @@ public class Lab1 { // не буду наследовать, возможно б
         switch (type) {
             case "1":
                 byte[] byteA = {0};
-                byte byteRes;
+                int byteRes;
                 if (Lab1.validNumbers(byteA)) {
-                    byteRes = (byte) Math.abs(byteA[0]);
-                    System.out.println(byteRes);
-                    db.insertValue(byteRes, Lab1.getTableName());
+                    byteRes = Math.abs(byteA[0]);
+                    Lab1.printAndSave(byteRes, Lab1.getTableName());
                 }
                 break;
             case "2":
@@ -271,17 +274,15 @@ public class Lab1 { // не буду наследовать, возможно б
                 int intRes;
                 if (Lab1.validNumbers(intA)) {
                     intRes = Math.abs(intA[0]);
-                    System.out.println(intRes);
-                    db.insertValue(intRes, Lab1.getTableName());
+                    Lab1.printAndSave(intRes, Lab1.getTableName());
                 }
                 break;
             case "3":
                 float[] floatA = {0};
-                float floatRes;
+                int floatRes;
                 if (Lab1.validNumbers(floatA)) {
-                    floatRes = Math.abs(floatA[0]);
-                    System.out.println(floatRes);
-                    db.insertValue(floatRes, Lab1.getTableName());
+                    floatRes = (int) Math.abs(floatA[0]);
+                    Lab1.printAndSave(floatRes, Lab1.getTableName());
                 }
                 break;
             default:
@@ -295,27 +296,24 @@ public class Lab1 { // не буду наследовать, возможно б
                 byte[] byteAb = {0, 0};
                 byte byteRes;
                 if (Lab1.validNumbers(byteAb)) {
-                    byteRes = (byte) Math.pow(byteAb[0], byteAb[1]);
-                    System.out.println(byteRes);
-                    db.insertValue(byteRes, Lab1.getTableName());
+                    byteRes = (byte) (Math.pow(byteAb[0], byteAb[1]));
+                    Lab1.printAndSave(byteRes, Lab1.getTableName());
                 }
                 break;
             case "2":
                 int[] intAb = {0, 0};
                 int intRes;
                 if (Lab1.validNumbers(intAb)) {
-                    intRes = (int) Math.pow(intAb[0], intAb[1]);
-                    System.out.println(intRes);
-                    db.insertValue(intRes, Lab1.getTableName());
+                    intRes = (int) (Math.pow(intAb[0], intAb[1]));
+                    Lab1.printAndSave(intRes, Lab1.getTableName());
                 }
                 break;
             case "3":
                 float[] floatAb = {0, 0};
                 float floatRes;
                 if (Lab1.validNumbers(floatAb)) {
-                    floatRes = (float) Math.pow(floatAb[0], floatAb[1]);
-                    System.out.println(floatRes);
-                    db.insertValue(floatRes, Lab1.getTableName());
+                    floatRes = (float) (Math.pow(floatAb[0], floatAb[1]));
+                    Lab1.printAndSave(floatRes, Lab1.getTableName());
                 }
                 break;
             default:
@@ -334,8 +332,10 @@ public class Lab1 { // не буду наследовать, возможно б
                 4.  Вычитание чисел, результат сохранить в MySQL с последующим выводом в консоль.
                 5.  Умножение чисел, результат сохранить в MySQL с последующим выводом в консоль.
                 6.  Деление чисел, результат сохранить в MySQL с последующим выводом в консоль.
+                    - ответ типа float
                 7.  Деление чисел по модулю (остаток), результат сохранить в MySQL с последующим выводом в консоль.
                 8.  Возведение числа в модуль, результат сохранить в MySQL с последующим выводом в консоль.
+                    - ответ типа integer
                 9.  Возведение числа в степень, результат сохранить в MySQL с последующим выводом в консоль.
                 10. Сохранить все данные (вышеполученные результаты) из MySQL в Excel и вывести на экран
                 11. Выйти из программы
@@ -398,7 +398,7 @@ public class Lab1 { // не буду наследовать, возможно б
                 Lab1.mod(type);
                 break;
             case "8": // Возведение числа в модуль, результат сохранить в MySQL с последующим выводом в консоль.
-                System.out.println("\n|a| (результат соответствующего типа)");
+                System.out.println("\n|a| (результат типа int)");
                 System.out.print(types);
                 type = scanner.next();
                 Lab1.abs(type);
@@ -423,6 +423,8 @@ public class Lab1 { // не буду наследовать, возможно б
     // установление взаимодействия с бд и начало работы с пользователем
     public static void main(String[] args) {
         db = new DBInteraction("lab1");  // установление взаимодействия с бд
+        if (!db.connected)
+            return;
         db.setFilePath("C:\\Users\\Antonova Alena\\Downloads\\lab1.xlsx");  // xlsx файл для сохранения данных
         Lab1.interaction();  // начинаем работать с пользователем
     }

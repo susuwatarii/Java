@@ -21,16 +21,22 @@ public class Lab2 {  // скорее всего буду наследовать:
         return false;
     }
 
+    private static void printAndSave(String str, String tableName) {
+        System.out.println(str);
+        db.insertValue(str, tableName);
+    }
+
+
     // Ввести две строки с клавиатуры, результат сохранить в MySQL с последующим выводом в консоль.
     protected static void enterStrings() {
         System.out.print("Строка 1: ");
-        str1 = scanner.next();
+        scanner.nextLine();
+        str1 = scanner.nextLine();
         System.out.print("Строка 2: ");
-        str2 = scanner.next();
+        str2 = scanner.nextLine();
         String tableName3 = Lab2.getTableName();
-        db.insertValue(str1, tableName3);
-        db.insertValue(str2, tableName3);
-        System.out.println(str1 + "\n" + str2);
+        Lab2.printAndSave(str1, tableName3);
+        Lab2.printAndSave(str2, tableName3);
     }
 
     // Подсчитать размер ранее введенных строк, результат сохранить в MySQL с последующим выводом в консоль.
@@ -39,9 +45,8 @@ public class Lab2 {  // скорее всего буду наследовать:
             String len1 = String.valueOf(str1.length());
             String len2 = String.valueOf(str2.length());
             String tableName4 = Lab2.getTableName();
-            db.insertValue(len1, tableName4);
-            db.insertValue(len2, tableName4);
-            System.out.println(str1 + ": " + len1 + "\n" + str2 + ": " + len1);
+            Lab2.printAndSave(len1, tableName4);
+            Lab2.printAndSave(len2, tableName4);
         }
     }
 
@@ -49,8 +54,7 @@ public class Lab2 {  // скорее всего буду наследовать:
     private static void concatStrings() {
         if (Lab2.StringsAreEntered()) {
             String res = str1 + str2 ;
-            db.insertValue(res, Lab2.getTableName());
-            System.out.println(res);
+            Lab2.printAndSave(res, Lab2.getTableName());
         }
     }
 
@@ -63,8 +67,7 @@ public class Lab2 {  // скорее всего буду наследовать:
             } else {
                 res2 = "Строки не равны";
             }
-            db.insertValue(res2, Lab2.getTableName());
-            System.out.println(res2);
+            Lab2.printAndSave(res2, Lab2.getTableName());
         }
     }
 
@@ -75,14 +78,10 @@ public class Lab2 {  // скорее всего буду наследовать:
                 
                 1. Вывести все таблицы из MySQL.
                 2. Создать таблицу в MySQL.
-                3. Ввести две строки с клавиатуры, результат сохранить в MySQL с последующим выводом в
-                консоль.
-                4. Подсчитать размер ранее введенных строк, результат сохранить в MySQL с последующим
-                выводом в консоль.
-                5. Объединить две строки в единое целое, результат сохранить в MySQL с последующим выводом
-                в консоль.
-                6. Сравнить две ранее введенные строки, результат сохранить в MySQL с последующим выводом
-                в консоль.
+                3. Ввести две строки с клавиатуры, результат сохранить в MySQL с последующим выводом в консоль.
+                4. Подсчитать размер ранее введенных строк, результат сохранить в MySQL с последующим выводом в консоль.
+                5. Объединить две строки в единое целое, результат сохранить в MySQL с последующим выводом в консоль.
+                6. Сравнить две ранее введенные строки, результат сохранить в MySQL с последующим выводом в консоль.
                 7. Сохранить все данные (вышеполученные результаты) из MySQL в Excel и вывести на экран.
                 8. Выйти из программы
                 :\s""";
@@ -122,6 +121,8 @@ public class Lab2 {  // скорее всего буду наследовать:
     // установление взаимодействия с бд и начало работы с пользователем
     public static void main(String[] args) {
         db = new DBInteraction("lab2");  // установление взаимодействия с бд
+        if (!db.connected)
+            return;
         db.setFilePath("C:\\Users\\Antonova Alena\\Downloads\\lab2.xlsx");  // xlsx файл для сохранения данных
         Lab2.interaction();  // начинаем работать с пользователем
     }

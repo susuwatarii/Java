@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 // взаимодействие с выбранной базой данных
 public class DBInteraction {  //  будет наследование, если возникнет потребность расширить функционал
-    protected boolean connected = false; // получилось ли подключиться к бд
+    public boolean connected = false; // получилось ли подключиться к бд
     protected Connection connection;
     protected final String dbName;
     protected static Scanner scanner = new Scanner(System.in);
@@ -37,10 +37,10 @@ public class DBInteraction {  //  будет наследование, если 
         String dbNameUrl = "jdbc:mysql://localhost:3306/" + dbName; // url для подключения дб MySQl java data base connectivity, 3306 - port name
         try{
             connection = DriverManager.getConnection(dbNameUrl, "root", "1234"); // с точки зрения безопасности не выносить пароль и логин в переменные
-            System.out.println("успешное подключение к бд\n");
+            System.out.println("успешное подключение к базе данных\n");
             connected = true;
         } catch (SQLException e) {
-            System.out.println("ошибка подключения к бд!\n" + e.getMessage() + "\n");
+            System.out.println("ошибка подключения к базе данных!\n" + e.getMessage() + "\n");
             connected = false;
         }
     }

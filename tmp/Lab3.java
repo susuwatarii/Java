@@ -69,7 +69,7 @@ public class Lab3 { // не буду наследовать, возможно б
             case "2": // Создать таблицу в MySQL.
                 db.createTable(Lab1.getTableName(), "int");
                 break;
-            case "3": // считывание, проверка, печать и запись чисел
+            case "3": // Cчитывание, проверка, печать и запись чисел
                 Lab3.readInt();
                 break;
             case "4": // Сохранить данные из MySQL в Excel и вывести на экран.
@@ -86,6 +86,8 @@ public class Lab3 { // не буду наследовать, возможно б
     // установление взаимодействия с бд и начало работы с пользователем
     public static void main(String[] args) {
         db = new DBInteraction("lab3");  // установление взаимодействия с бд
+        if (!db.connected)
+            return;
         db.setFilePath("C:\\Users\\Antonova Alena\\Downloads\\lab3.xlsx");  // xlsx файл для сохранения данных
         Lab3.interaction();  // начинаем работать с пользователем
     }
