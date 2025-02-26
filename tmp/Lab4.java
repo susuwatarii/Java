@@ -67,27 +67,27 @@ public class Lab4 {
             if (index1 != -1) {
                 Lab4.printAndSave(Integer.toString(index1), tableName);
             } else {
-                System.out.println("Подстрока НЕ найдена в строке 1");
+                Lab4.printAndSave("Подстрока НЕ найдена", tableName);
             }
             System.out.println("В строке 2");
             if (index2 != -1) {
                 Lab4.printAndSave(Integer.toString(index2), tableName);
             } else {
-                System.out.println("Подстрока НЕ найдена в строке 2");
+                Lab4.printAndSave("Подстрока НЕ найдена", tableName);
             }
 
             // заканчиваются ли строки подстрокой
             System.out.println("В строке 1");
             if (str1.endsWith(substring)) {
-                Lab4.printAndSave("заканчивается " + substring, tableName);
+                Lab4.printAndSave("Заканчивается " + substring, tableName);
             } else {
-                Lab4.printAndSave("не заканчивается подстрокой " + substring, tableName);
+                Lab4.printAndSave("Не заканчивается подстрокой " + substring, tableName);
             }
             System.out.println("В строке 2");
             if (str2.endsWith(substring)) {
-                Lab4.printAndSave("заканчивается " + substring, tableName);
+                Lab4.printAndSave("Заканчивается подстрокой " + substring, tableName);
             } else {
-                Lab4.printAndSave("не заканчивается подстрокой " + substring, tableName);
+                Lab4.printAndSave("Не заканчивается подстрокой " + substring, tableName);
             }
         }
     }

@@ -1,14 +1,13 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-//////////////////////////////    заменить проверку на 0
 
 public class Lab1 { // не буду наследовать, возможно буду использовать некоторые методы
     private static DBInteraction  db; //  для базы данных с которой работаем (lab1)
     private static final String wrongChoiceMsg = "Выбранного пункта меню не существует!";
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static String getTableName() {
+    private static String getTableName() {
         System.out.println("Название таблицы в которою нужно сохранить результат: ");
         return scanner.next();
     }
@@ -39,7 +38,7 @@ public class Lab1 { // не буду наследовать, возможно б
             }
         } catch (InputMismatchException e){
             scanner.nextLine(); // если не считалось число, то его нужно считать
-            System.out.println(e.getMessage());
+            System.out.println("Ошибка " + e.getMessage());
             return false;
         }
         return true;
@@ -55,7 +54,7 @@ public class Lab1 { // не буду наследовать, возможно б
             }
         } catch (InputMismatchException e){
             scanner.nextLine();
-            System.out.println(e.getMessage());
+            System.out.println("Ошибка " + e.getMessage());
             return false;
         }
         return true;
@@ -71,7 +70,7 @@ public class Lab1 { // не буду наследовать, возможно б
             }
         } catch (InputMismatchException e){
             scanner.nextLine();
-            System.out.println(e.getMessage());
+            System.out.println("Ошибка " + e.getMessage());
             return false;
         }
         return true;
@@ -260,9 +259,9 @@ public class Lab1 { // не буду наследовать, возможно б
         switch (type) {
             case "1":
                 byte[] byteA = {0};
-                int byteRes;
+                byte byteRes;
                 if (Lab1.validNumbers(byteA)) {
-                    byteRes = Math.abs(byteA[0]);
+                    byteRes = (byte) Math.abs(byteA[0]);
                     Lab1.printAndSave(byteRes, Lab1.getTableName());
                 }
                 break;
@@ -276,9 +275,9 @@ public class Lab1 { // не буду наследовать, возможно б
                 break;
             case "3":
                 float[] floatA = {0};
-                int floatRes;
+                float floatRes;
                 if (Lab1.validNumbers(floatA)) {
-                    floatRes = (int) Math.abs(floatA[0]);
+                    floatRes = Math.abs(floatA[0]);
                     Lab1.printAndSave(floatRes, Lab1.getTableName());
                 }
                 break;
@@ -332,7 +331,6 @@ public class Lab1 { // не буду наследовать, возможно б
                     - ответ типа float
                 7.  Деление чисел по модулю (остаток), результат сохранить в MySQL с последующим выводом в консоль.
                 8.  Возведение числа в модуль, результат сохранить в MySQL с последующим выводом в консоль.
-                    - ответ типа integer
                 9.  Возведение числа в степень, результат сохранить в MySQL с последующим выводом в консоль.
                 10. Сохранить все данные (вышеполученные результаты) из MySQL в Excel и вывести на экран
                 11. Выйти из программы
@@ -395,7 +393,7 @@ public class Lab1 { // не буду наследовать, возможно б
                 Lab1.mod(type);
                 break;
             case "8": // Возведение числа в модуль, результат сохранить в MySQL с последующим выводом в консоль.
-                System.out.println("\n|a| (результат типа int)");
+                System.out.println("\n|a| (результат соответствующего типа)");
                 System.out.print(types);
                 type = scanner.next();
                 Lab1.abs(type);

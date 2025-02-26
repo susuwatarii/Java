@@ -12,6 +12,11 @@ public class Lab3 { // не буду наследовать, возможно б
         return scanner.next();
     }
 
+    private static void printAndSave(String res, String tableName) {
+        System.out.println(res);
+        db.insertValue(res, tableName);
+    }
+
     // считывание целых чисел, обработка неправильного ввода, сохранение в MySQL и вывод в консоль
     private static void readInt() {
         String tableName = Lab3.getTableName();
@@ -37,12 +42,10 @@ public class Lab3 { // не буду наследовать, возможно б
             }
             // проверка на четность
             if (number % 2 == 0) {
-                System.out.println("число  " + number + " - целое число, четное");
+                Lab3.printAndSave(number + " - целое число, четное", tableName);
             } else {
-                System.out.println("число  " + number + " - целое число, нечетное");
+                Lab3.printAndSave(number + " - целое число, нечетное", tableName);
             }
-            // запись в MySQL
-            db.insertValue(number, tableName);
         }
     }
 
@@ -67,7 +70,7 @@ public class Lab3 { // не буду наследовать, возможно б
                 db.printTableNames();
                 break;
             case "2": // Создать таблицу в MySQL.
-                db.createTable(Lab1.getTableName(), "int");
+                db.createTable(Lab3.getTableName(), "varchar(255)");
                 break;
             case "3": // Cчитывание, проверка, печать и запись чисел
                 Lab3.readInt();

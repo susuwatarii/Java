@@ -24,7 +24,7 @@ public class DBInteraction {  //  будет наследование, если 
     }
 
     public String getFilePath() {
-        return this.filePath = filePath;
+        return this.filePath;
     }
 
     public DBInteraction(String dbName) {

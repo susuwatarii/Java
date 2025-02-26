@@ -26,7 +26,6 @@ public class Lab2 {  // скорее всего буду наследовать:
         db.insertValue(str, tableName);
     }
 
-
     // Ввести две строки с клавиатуры, результат сохранить в MySQL с последующим выводом в консоль.
     private static void enterStrings() {
         System.out.print("Строка 1: ");
